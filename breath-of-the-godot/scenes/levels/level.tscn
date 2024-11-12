@@ -1,0 +1,70 @@
+[gd_scene load_steps=10 format=3 uid="uid://cngfs4i1nr56y"]
+
+[ext_resource type="PackedScene" uid="uid://boijqv1a0aveh" path="res://scenes/Entities/Player/player.tscn" id="1_wv3wb"]
+[ext_resource type="PackedScene" uid="uid://bqijhgyxbvnp2" path="res://scenes/camera.tscn" id="2_noul2"]
+[ext_resource type="Script" path="res://scenes/levels/player_control_component.gd" id="3_xomhs"]
+[ext_resource type="Script" path="res://scenes/levels/camera_control_component.gd" id="4_hpn32"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_y5mcw"]
+sky_top_color = Color(0.32549, 0.694118, 0.854902, 1)
+sky_horizon_color = Color(0.624757, 0.717328, 0.756907, 1)
+sky_energy_multiplier = 0.9
+ground_bottom_color = Color(0.173539, 0.175196, 0.172726, 1)
+ground_horizon_color = Color(0.624757, 0.717328, 0.756907, 1)
+
+[sub_resource type="Sky" id="Sky_a34di"]
+sky_material = SubResource("ProceduralSkyMaterial_y5mcw")
+
+[sub_resource type="Environment" id="Environment_5evpv"]
+background_mode = 2
+sky = SubResource("Sky_a34di")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bskms"]
+size = Vector3(40, 0.5, 40)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a1jb6"]
+size = Vector3(16, 6.66602, 0.684448)
+
+[node name="Level" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5evpv")
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Environment"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Environment/StaticBody3D"]
+size = Vector3(40, 0.5, 40)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/StaticBody3D"]
+shape = SubResource("BoxShape3D_bskms")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="Environment"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Environment/StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.583, -10.521)
+size = Vector3(16, 6.66602, 0.684448)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.583, -10.521)
+shape = SubResource("BoxShape3D_a1jb6")
+
+[node name="Entities" type="Node3D" parent="."]
+
+[node name="Player" parent="Entities" instance=ExtResource("1_wv3wb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+
+[node name="Camera" parent="." instance=ExtResource("2_noul2")]
+
+[node name="PlayerControlComponent" type="Node" parent="." node_paths=PackedStringArray("player", "camera")]
+script = ExtResource("3_xomhs")
+player = NodePath("../Entities/Player")
+camera = NodePath("../Camera")
+
+[node name="CameraControlComponent" type="Node" parent="." node_paths=PackedStringArray("camera", "target")]
+script = ExtResource("4_hpn32")
+camera = NodePath("../Camera")
+target = NodePath("../Entities/Player")
