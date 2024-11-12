@@ -16,4 +16,4 @@ func _input(event: InputEvent) -> void:
 func rotate_from_vector(v: Vector2) -> void:
 	if v.length() == 0: return
 	camera.rotation.y -= v.x
-	camera.rotation.x = clamp(camera.rotation.x + v.y, min_limit_x, max_limit_x)
+	camera.rotation.x = clamp(camera.rotation.x - v.y, min_limit_x, max_limit_x)
