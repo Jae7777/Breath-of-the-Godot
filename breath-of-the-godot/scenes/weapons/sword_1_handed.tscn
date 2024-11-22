@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3 uid="uid://doe0js5wngtev"]
+
+[ext_resource type="PackedScene" uid="uid://cp757r6txb0j6" path="res://graphics/weapons/sword_1handed.gltf" id="1_n6n57"]
+[ext_resource type="Texture2D" uid="uid://cbf5176yt1e2d" path="res://graphics/weapons/barbarian_texture.png" id="2_aa5mc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_regvd"]
+albedo_texture = ExtResource("2_aa5mc")
+
+[node name="Sword1Handed" instance=ExtResource("1_n6n57")]
+
+[node name="sword_1handed" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_regvd")

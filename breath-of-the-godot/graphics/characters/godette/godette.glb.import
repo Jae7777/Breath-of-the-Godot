@@ -34,9 +34,9 @@ import_script/path=""
 _subresources={
 "animations": {
 "1H_Melee_Attack_Chop": {
-"save_to_file/enabled": false,
+"save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": true,
-"save_to_file/path": "res://graphics/characters/godette/animations/chop.res",
+"save_to_file/path": "res://graphics/characters/godette/animations/1h_melee_attack_chop.res",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
@@ -1833,9 +1833,9 @@ _subresources={
 "slices/amount": 0
 },
 "1H_Melee_Attack_Slice_Horizontal": {
-"save_to_file/enabled": false,
+"save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": true,
-"save_to_file/path": "res://graphics/characters/godette/animations/slice.res",
+"save_to_file/path": "res://graphics/characters/godette/animations/1h_melee_attack_slice_horizontal.res",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
@@ -5434,7 +5434,7 @@ _subresources={
 "save_to_file/enabled": false,
 "save_to_file/keep_custom_tracks": "",
 "save_to_file/path": "",
-"settings/loop_mode": 0,
+"settings/loop_mode": 1,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
 "slice_1/name": "",
@@ -9032,7 +9032,7 @@ _subresources={
 "save_to_file/enabled": false,
 "save_to_file/keep_custom_tracks": "",
 "save_to_file/path": "",
-"settings/loop_mode": 0,
+"settings/loop_mode": 1,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
 "slice_1/name": "",
@@ -10828,9 +10828,9 @@ _subresources={
 "slices/amount": 0
 },
 "Spellcast_Shoot": {
-"save_to_file/enabled": false,
+"save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": true,
-"save_to_file/path": "res://graphics/characters/godette/animations/spellcast.res",
+"save_to_file/path": "res://graphics/characters/godette/animations/spellcast_shoot.res",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,

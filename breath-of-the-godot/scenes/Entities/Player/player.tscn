@@ -1,15 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://boijqv1a0aveh"]
+[gd_scene load_steps=6 format=3 uid="uid://c23vj2u6pwshu"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_vw4s5"]
+[ext_resource type="PackedScene" uid="uid://iua2dw5qrl1e" path="res://scenes/Entities/Player/godette_model.tscn" id="1_sf27r"]
+[ext_resource type="Script" path="res://scenes/Entities/Player/player.gd" id="1_vf0k4"]
+[ext_resource type="PackedScene" uid="uid://bqijhgyxbvnp2" path="res://scenes/camera.tscn" id="3_7aai4"]
+[ext_resource type="Script" path="res://scenes/Entities/Player/camera.gd" id="4_o5diy"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u8c62"]
 
 [node name="Player" type="CharacterBody3D"]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("CapsuleMesh_vw4s5")
+script = ExtResource("1_vf0k4")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_u8c62")
+
+[node name="GodetteModel" parent="." instance=ExtResource("1_sf27r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0047946, -0.0128436, 0.00422502)
+
+[node name="Camera" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_7aai4")]
+script = ExtResource("4_o5diy")
+target = NodePath("..")
