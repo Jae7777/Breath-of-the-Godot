@@ -10,7 +10,7 @@ var squash_and_stretch := 1.0:
 	set(value):
 		squash_and_stretch = value
 		var negative = 1.0 + (1.0 - squash_and_stretch)
-		scale = Vector3(1.0, squash_and_stretch, 1.0)
+		scale = Vector3(1.0, negative, 1.0)
 const faces = {
 	'default': Vector3.ZERO,
 	'blink': Vector3(0, 0.5, 0)
