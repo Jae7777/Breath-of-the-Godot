@@ -17,7 +17,7 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
     target = body
 
 func handle_aggro(_delta: float) -> void:
-  if target and (self.position - target.position).length() > hit_range:
+  if target and not target_in_cast_range():
     var direction = (target.global_transform.origin - global_transform.origin).normalized()
     self.velocity = Vector3(direction.x, 0, direction.z) * move_speed
     model.look_at(target.global_transform.origin)
@@ -26,3 +26,10 @@ func handle_aggro(_delta: float) -> void:
   else:
     self.velocity = Vector3.ZERO
     model.set_move_state('Idle')
+  
+func target_in_cast_range() -> bool:
+  return target and (self.position - target.position).length() <= hit_range
+
+func _on_attack_timer_timeout() -> void:
+  if target and target_in_cast_range():
+    model.attack()
