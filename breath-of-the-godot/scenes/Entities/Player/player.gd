@@ -15,7 +15,7 @@ extends CharacterBody3D
 var jump_landed := true
 
 # movement
-@export var base_speed := 6.0 * 60
+@export var base_speed := 6.0
 @export var run_speed := 10.0 * 60
 @export var defend_speed := 2.0 * 60
 
@@ -53,7 +53,7 @@ func handle_move(delta: float) -> void:
 	var velocity_2d = Vector2(self.velocity.x, self.velocity.z)
 	if movement_input.length() > 0.0:
 		var move_speed = self._get_move_speed()
-		velocity_2d = movement_input * move_speed * delta
+		velocity_2d = movement_input * move_speed
 		model.set_move_state("Running_B")
 		var target_angle = -movement_input.angle() + PI/2
 		model.rotation.y = rotate_toward(model.rotation.y, target_angle, 9.0 * delta)

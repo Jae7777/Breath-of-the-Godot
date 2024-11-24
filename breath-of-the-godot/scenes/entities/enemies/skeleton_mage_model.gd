@@ -1,11 +1,6 @@
 extends Node3D
 
+@onready var move_state_machine = $AnimationTree.get("parameters/MoveStateMachine/playback")
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-  pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-  pass
+func set_move_state(state_name: String) -> void:
+  move_state_machine.travel(state_name)

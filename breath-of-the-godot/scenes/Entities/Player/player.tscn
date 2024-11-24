@@ -1,24 +1,32 @@
-[gd_scene load_steps=6 format=3 uid="uid://dy283r3klew21"]
+[gd_scene load_steps=6 format=3 uid="uid://cc2mjaaoi2hsp"]
 
+[ext_resource type="Script" path="res://scenes/entities/player/player.gd" id="1_l5vfw"]
 [ext_resource type="PackedScene" uid="uid://di7nglbnx6h64" path="res://scenes/entities/player/godette_model.tscn" id="1_sf27r"]
-[ext_resource type="Script" path="res://scenes/entities/player/player.gd" id="1_vf0k4"]
-[ext_resource type="PackedScene" uid="uid://bqijhgyxbvnp2" path="res://scenes/camera.tscn" id="3_7aai4"]
-[ext_resource type="Script" path="res://scenes/entities/player/camera.gd" id="4_o5diy"]
+[ext_resource type="Script" path="res://scenes/entities/player/camera.gd" id="3_4tudt"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u8c62"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_it1al"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_n1b17"]
 
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
 collision_layer = 2
 collision_mask = 5
-script = ExtResource("1_vf0k4")
+script = ExtResource("1_l5vfw")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_u8c62")
+shape = SubResource("CapsuleShape3D_it1al")
 
 [node name="GodetteModel" parent="." instance=ExtResource("1_sf27r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0047946, -0.0128436, 0.00422502)
 
-[node name="Camera" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_7aai4")]
-script = ExtResource("4_o5diy")
+[node name="Camera" type="Node3D" parent="." node_paths=PackedStringArray("target")]
+script = ExtResource("3_4tudt")
 target = NodePath("..")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="Camera"]
+shape = SubResource("SphereShape3D_n1b17")
+spring_length = 6.5
+
+[node name="Camera3D" type="Camera3D" parent="Camera/SpringArm3D"]
+current = true

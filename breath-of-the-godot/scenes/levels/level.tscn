@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cngfs4i1nr56y"]
 
-[ext_resource type="PackedScene" uid="uid://dy283r3klew21" path="res://scenes/entities/player/player.tscn" id="1_wv3wb"]
+[ext_resource type="PackedScene" uid="uid://cc2mjaaoi2hsp" path="res://scenes/entities/player/player.tscn" id="1_wv3wb"]
 [ext_resource type="PackedScene" uid="uid://dcpxcj4u0otjj" path="res://scenes/entities/enemies/skeleton_mage.tscn" id="2_i5ghe"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_y5mcw"]
@@ -60,7 +60,7 @@ shape = SubResource("BoxShape3D_a1jb6")
 [node name="Entities" type="Node3D" parent="."]
 
 [node name="Player" parent="Entities" instance=ExtResource("1_wv3wb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 
 [node name="SkeletonMage" parent="Entities" instance=ExtResource("2_i5ghe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 15)
+move_speed = 2.5
