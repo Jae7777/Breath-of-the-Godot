@@ -16,8 +16,8 @@ var jump_landed := true
 
 # movement
 @export var base_speed := 6.0
-@export var run_speed := 10.0 * 60
-@export var defend_speed := 2.0 * 60
+@export var run_speed := 10.0
+@export var defend_speed := 2.0
 
 var movement_input := Vector2.ZERO
 

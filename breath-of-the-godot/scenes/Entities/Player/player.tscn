@@ -25,8 +25,9 @@ script = ExtResource("3_4tudt")
 target = NodePath("..")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23231, 0)
 shape = SubResource("SphereShape3D_n1b17")
-spring_length = 6.5
+spring_length = 15.0
 
 [node name="Camera3D" type="Camera3D" parent="Camera/SpringArm3D"]
 current = true
