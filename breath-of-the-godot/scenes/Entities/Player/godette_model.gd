@@ -7,58 +7,58 @@ extends Node3D
 
 var attacking := false
 var squash_and_stretch := 1.0:
-	set(value):
-		squash_and_stretch = value
-		var negative = 1.0 + (1.0 - squash_and_stretch)
-		scale = Vector3(1.0, negative, 1.0)
+  set(value):
+    squash_and_stretch = value
+    var negative = 1.0 + (1.0 - squash_and_stretch)
+    scale = Vector3(1.0, negative, 1.0)
 const faces = {
-	'default': Vector3.ZERO,
-	'blink': Vector3(0, 0.5, 0)
+  'default': Vector3.ZERO,
+  'blink': Vector3(0, 0.5, 0)
 }
 var rng = RandomNumberGenerator.new()
 
 func set_move_state(state_name: String) -> void:
-	move_state_machine.travel(state_name)
+  move_state_machine.travel(state_name)
 
-func attack() -> void:
-	if not attacking:
-		attack_state_machine.travel("1H_Melee_Attack_Slice_Horizontal" if $SecondAttackTimer.time_left > 0.0 else "1H_Melee_Attack_Chop")
-		$AnimationTree.set("parameters/AttackOneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+func primary_action() -> void:
+  if not attacking:
+    attack_state_machine.travel("1H_Melee_Attack_Slice_Horizontal" if $SecondAttackTimer.time_left > 0.0 else "1H_Melee_Attack_Chop")
+    $AnimationTree.set("parameters/AttackOneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 func attack_toggle(value: bool):
-	attacking = value
+  attacking = value
 
 func defend(forward: bool) -> void:
-	var tween = create_tween()
-	tween.tween_method(_defend_change, 1.0 - float(forward), float(forward), 0.25)
+  var tween = create_tween()
+  tween.tween_method(_defend_change, 1.0 - float(forward), float(forward), 0.25)
 
 func _defend_change(value: float) -> void:
-	$AnimationTree.set("parameters/ShieldBlend/blend_amount", value)
+  $AnimationTree.set("parameters/ShieldBlend/blend_amount", value)
 
 func switch_weapon(weapon_active: bool) -> void:
-	if weapon_active: 
-		$Rig/Skeleton3D/RightHandSlot/Wand.hide()
-		$Rig/Skeleton3D/RightHandSlot/Sword1Handed.show()
-	else: 
-		$Rig/Skeleton3D/RightHandSlot/Sword1Handed.hide()
-		$Rig/Skeleton3D/RightHandSlot/Wand.show()
+  if weapon_active: 
+    $Rig/Skeleton3D/RightHandSlot/Wand.hide()
+    $Rig/Skeleton3D/RightHandSlot/Sword1Handed.show()
+  else: 
+    $Rig/Skeleton3D/RightHandSlot/Sword1Handed.hide()
+    $Rig/Skeleton3D/RightHandSlot/Wand.show()
 
 func cast_spell():
-	if not attacking:
-		extra_animation.animation = 'Spellcast_Shoot'
-		$AnimationTree.set("parameters/ExtraOneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+  if not attacking:
+    extra_animation.animation = 'Spellcast_Shoot'
+    $AnimationTree.set("parameters/ExtraOneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 func hit() -> void:
-	extra_animation.animation = 'Hit_A'
-	$AnimationTree.set("parameters/ExtraOneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-	$AnimationTree.set('parameters/AttackOneShot/request', AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
-	attacking = false
+  extra_animation.animation = 'Hit_A'
+  $AnimationTree.set("parameters/ExtraOneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+  $AnimationTree.set('parameters/AttackOneShot/request', AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
+  attacking = false
 
 func change_face(expression):
-	face_material.uv1_offset = faces[expression]
+  face_material.uv1_offset = faces[expression]
 
 func _on_blink_timer_timeout():
-	change_face('blink')
-	await get_tree().create_timer(0.2).timeout
-	change_face('default')
-	$BlinkTimer.wait_time = rng.randf_range(1.8, 5.0)
+  change_face('blink')
+  await get_tree().create_timer(0.2).timeout
+  change_face('default')
+  $BlinkTimer.wait_time = rng.randf_range(1.8, 5.0)
